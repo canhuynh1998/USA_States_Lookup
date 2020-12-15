@@ -22,14 +22,11 @@ const searchStates = async searchText =>{
         return state.name.match(regex) || state.abbr.match(regex);
     });
     console.log(matches);
-    // $('search').
-    //$("input[type='text']").on("placeholder",matches[0].name);
-    //$('input[name="state"]').attr('placeholder', matches[0].name.text()); 
+
     //Make sure there are only at max 8 results
     while(matches.length > 8){
         matches.pop();
     }
-    
     //Display nothing initially or nothing matches
     if(searchText.length === 0 || matches.length == 0){
         matches = [];
@@ -38,6 +35,36 @@ const searchStates = async searchText =>{
 
     outputHtml(matches);
 
+
+    let count = 0;      // keep track of times pressing the arrow keys
+    let index = 0;      // keep track of the index of matches.
+    $(document).keydown(function(event){    
+        if(event.keyCode === 40){
+           
+            console.log(count);
+            index = count % (matches.length );
+            console.log(index + " "+ count+" "+matches.length);
+        //    $('this.#selection').css( "background": "#39587e");
+            search.value = matches[index].name;
+            count++;
+            // if(count ==)
+        }else if(event.keyCode === 38){
+            
+            console.log(count);
+            index = count % (matches.length);
+            console.log(index + " "+ count+" "+matches.length);
+            search.value = matches[index].name;
+            count--;
+            if(count < 0){
+                count = matches.length-1;
+            }
+        }
+
+        if(event.keyCode === 13){
+            alert(matches[index].name)
+        }
+
+    });
 }
 
 
@@ -48,8 +75,8 @@ const outputHtml = matches =>{
         const html = matches.map(match => `
         <div class="select-box">
         <div class ="options-container">
-        <div class ="option" id ="selection:>
-        <input type="radio" class ="radio" readonly ="false">
+        <div class ="option" id ="selection">
+        <input type="radio"  class ="radio" readonly ="false">
         <label>${match.name}</label>
         </div>
         </div>
@@ -59,8 +86,12 @@ const outputHtml = matches =>{
         .join('');
         console.log("Hi");
         matchList.innerHTML =html;
-
+        // // | event.keyCode === 38){
+        //     count ++;
+        let count = 0;      // keep track of times pressing the arrow keys
+        let index = 0;      // keep track of the index of matches.
         
+
         $('.option').on('click', function(event){
             search.value = ($(this).text().trim());
             console.log($(this).text());    //testing in the console.
