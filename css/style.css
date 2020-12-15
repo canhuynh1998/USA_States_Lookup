@@ -1,5 +1,5 @@
 *{
-    margin: 10;
+    margin: 0;
     box-sizing: border-box;
 }
 
@@ -12,6 +12,10 @@ h3{
     margin: 16px;
 }
 
+input{
+    background-color: #F0FFFF;
+}
+
 .container{
     margin-top: 100px;
     padding: 32px;
@@ -19,7 +23,7 @@ h3{
 
 /*Style input box*/
 .getState{
-    margin-left: auto;
+    
     height: 30px;
     width: 28%;
 }
@@ -51,8 +55,12 @@ h3{
 .select-box .option:hover{
     background: #39587e;
 }
+.select-box .option:-ms-keyboard-active{
+    background: #39587e;
+}
 .select-box label{
     cursor: pointer;
+
 }
 
 .select-box .option .radio{
